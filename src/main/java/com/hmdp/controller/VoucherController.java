@@ -4,6 +4,7 @@ package com.hmdp.controller;
 import com.hmdp.dto.Result;
 import com.hmdp.entity.Voucher;
 import com.hmdp.service.IVoucherService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.annotation.Resource;
@@ -13,9 +14,8 @@ import jakarta.annotation.Resource;
  *  前端控制器
  * </p>
  *
- * @author 虎哥
- * @since 2021-12-22
  */
+@Slf4j
 @RestController
 @RequestMapping("/voucher")
 public class VoucherController {
@@ -30,6 +30,7 @@ public class VoucherController {
      */
     @PostMapping
     public Result addVoucher(@RequestBody Voucher voucher) {
+        log.info("新增优惠券，优惠券信息：{}", voucher);
         voucherService.save(voucher);
         return Result.ok(voucher.getId());
     }
@@ -41,6 +42,7 @@ public class VoucherController {
      */
     @PostMapping("seckill")
     public Result addSeckillVoucher(@RequestBody Voucher voucher) {
+        log.info("新增秒杀优惠券，优惠券信息：{}", voucher);
         voucherService.addSeckillVoucher(voucher);
         return Result.ok(voucher.getId());
     }
@@ -52,6 +54,7 @@ public class VoucherController {
      */
     @GetMapping("/list/{shopId}")
     public Result queryVoucherOfShop(@PathVariable("shopId") Long shopId) {
+        log.info("查询店铺的优惠券列表，店铺id：{}", shopId);
        return voucherService.queryVoucherOfShop(shopId);
     }
 }
