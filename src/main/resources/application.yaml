@@ -1,13 +1,15 @@
 server:
   port: 8081
 spring:
+  profiles:
+    active: dev
   application:
     name: att
   datasource:
     #driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/hmdp?useSSL=false&serverTimezone=UTC
     username: root
-    password: 123456
+    password: ${spring.datasource.password}
 
   jackson:
     default-property-inclusion: non_null # JSON处理时忽略非空字段
@@ -15,7 +17,7 @@ spring:
     redis:
       host: 127.0.0.1
       port: 6379
-      #password: 123456
+
 mybatis-plus:
   type-aliases-package: com.att.entity # 别名扫描包
 logging:
